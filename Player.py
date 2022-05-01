@@ -38,7 +38,7 @@ class Player:
         self.isDouble.append(False)
 
     def double(self, i):
-        if len(self.hand) == 2:
+        if len(self.hand[i]) == 2:
             self.hit(i)
             self.isDouble[i] = True
         else:
@@ -85,21 +85,22 @@ class Player:
 
     def getAction(self, i):
         upcard = self.upcard
+        if len(self.hand[i]) == 1:
+            return 'H'
 
         if self.canSplit(i): # for split cases
             card = self.hand[i][0]
             row = str(card) + ', ' + str(card) # 'A, A' 
 
         elif 'A' in self.hand[i] and self.isHard[i] == False: # for soft aces cases
-            noAceValue = 0
-            for card in self.hand[i]:
-                if card != 'A':
-                    noAceValue += card
-            row = 'A, ' + str(card)
+            noAceValue = self.value[i] - 11
+            row = 'A, ' + str(noAceValue)
 
         else: # for hard cases
             row = self.value[i]
-            
+
+        #print(row)
+        #print(upcard)
         return self.genes.loc[row, upcard]
 
     def play(self):
@@ -108,13 +109,21 @@ class Player:
             upcard = 11
         n = len(self.hand)
         i = 0
-        while i < n:
+        while i < n :
             while self.value[i] < 21:
+                if len(self.hand[i]) == 1:
+                    self.hit(i)
+                    continue
+
                 action = self.getAction(i)
 
                 if action == 'Sp':
                     self.split(i)
                     print('Sp')
+                    if self.hand[i][0] == 'A':
+                        self.hit(i)
+                        self.hit(i+1)
+                        break
                     n += 1
 
                 elif action == 'H':

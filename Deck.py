@@ -13,7 +13,7 @@ class Deck:
             self.shuffle = True
         return self.deck.pop(-1)
 
-    def shuffle(self):
+    def shuffleDeck(self):
         self.deck = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] * 4 * self.numDecks
         random.shuffle(self.deck)
         self.shuffle = False

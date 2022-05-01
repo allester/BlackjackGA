@@ -2,7 +2,7 @@ from Table import Table
 import pandas as pd
 import random
 
-def getFitness(tableSize,  genes, numHands):
+def calculateFitness(tableSize,  genes, numHands):
     table = Table(tableSize, genes)
     players = table.table[:-1]
     dealer = table.table[-1]
@@ -20,7 +20,7 @@ def getFitness(tableSize,  genes, numHands):
         if table.blackjacks[-1] == True:
             for i in range(len(players)):
                 if table.blackjacks[:-1][i] == True:
-                    table.payout[i] = [0] #push
+                    table.payouts[i] = [0] #push
                 else:
                     table.payouts[i] = [-1]
 
@@ -51,12 +51,14 @@ def getFitness(tableSize,  genes, numHands):
         print(table.getValues())
 
         if table.deck.shuffle:
-            table.deck.shuffle()
+            table.deck.shuffleDeck()
             print("The Deck has been shuffled")
         
         table.clearHands()
 
         handsPlayed += 1
+
+    return table.table[:-1]
 
 actions = ['H', 'S', 'D', 'Sp']
 data = []
@@ -77,4 +79,4 @@ df.index = [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5,
             'A, 9', 'A, 8', 'A, 7', 'A, 6', 'A, 5', 'A, 4', 'A, 3', 'A, 2', 'A, A',
             '10, 10', '9, 9', '8, 8', '7, 7', '6, 6', '5, 5', '4, 4', '3, 3', '2, 2']
 print(df)
-getFitness(tableSize = 1, genes = df, numHands = 10)
+print(calculateFitness(tableSize = 1, genes = df, numHands = 100000))
