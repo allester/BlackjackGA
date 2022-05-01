@@ -104,14 +104,14 @@ class Table:
                 elif (not player.isBust[i] and player.getValue(i) == dealerValue and not dealer.isBust[0]):
                     playerPayouts.append(0)
 
-                print('Doubled down: ', player.isDouble[i])
+                #print('Doubled down: ', player.isDouble[i])
                 # if player doubled down on hand
                 if player.isDouble[i]:
                     playerPayouts[i] = playerPayouts[i] * 2
 
             payouts.append(playerPayouts)
         self.payouts = payouts
-        print('Payout: ', self.payouts)
+        #print('Payout: ', self.payouts)
 
     def payout(self):
         for i in range(self.numPlayers):

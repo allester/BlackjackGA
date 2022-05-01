@@ -119,7 +119,7 @@ class Player:
 
                 if action == 'Sp':
                     self.split(i)
-                    print('Sp')
+                    #print('Sp')
                     if self.hand[i][0] == 'A':
                         self.hit(i)
                         self.hit(i+1)
@@ -127,16 +127,16 @@ class Player:
                     n += 1
 
                 elif action == 'H':
-                    print('H')
+                    #print('H')
                     self.hit(i)
 
                 elif action == 'D':
-                    print('D')
+                    #print('D')
                     self.double(i)
                     break
 
                 else: # 'S'
-                    print('S')
+                    #rint('S')
                     break
             #next hand 
             i += 1

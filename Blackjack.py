@@ -10,9 +10,9 @@ def calculateFitness(tableSize,  genes, numHands):
     handsPlayed = 0
     while handsPlayed < numHands:
         table.deal()
-        print()
+        '''print()
         print('Hands Dealt:')
-        print(table.hands())
+        print(table.hands())'''
         #print(table.deck.deck)'''
 
         #check for if Dealer has Blackjack
@@ -44,15 +44,15 @@ def calculateFitness(tableSize,  genes, numHands):
             table.getPayouts()
 
         table.payout()
-        print('Chips:', table.getChips())
+        '''print('Chips:', table.getChips())
 
         print('After Play')
         print(table.hands())
-        print(table.getValues())
+        print(table.getValues())'''
 
         if table.deck.shuffle:
             table.deck.shuffleDeck()
-            print("The Deck has been shuffled")
+            #print("The Deck has been shuffled")
         
         table.clearHands()
 
