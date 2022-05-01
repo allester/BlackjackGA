@@ -266,7 +266,7 @@ class Table:
             n -= 1
 
         for player in self.table:
-            player.upcard = table.upcard()
+            player.upcard = self.upcard()
 
     def hands(self):
         hands = []
