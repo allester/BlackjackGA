@@ -1,4 +1,5 @@
 from Table import Table
+import matplotlib.pyplot as plt
 import pandas as pd
 import random
 import pickle
@@ -16,16 +17,21 @@ def geneticAlgorithm(population = None, POP_SIZE = 500, NUM_HANDS = 100000, TABL
         for j in range(POP_SIZE):
             players = calculateFitness(tableSize = 1, genes = genes[j], numHands = 100000)
             population[j] = players[0]
+            print(players[0].chipCount)
+            plt.scatter(i, players[0].chipCount)
 
-        bestIndividual = bestIndividual(population)
-        bestGenes.append([bestIndividual.chipCount, bestIndividual.genes])
+        bestInd = bestIndividual(population)
+        bestGenes.append([bestInd.chipCount, bestInd.genes])
         print('Best Fitness:', bestGenes[0])
-
+        
         selection = selectionTournament(population, GROUP_SIZE = 2)
         population = getOffspring(selection)
+    
 
     with open("genes.pkl", 'wb') as f:
         pickle.dump(bestGenes, f)
+
+    plt.show()
     
         
 def bestIndividual(population):
